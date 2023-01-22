@@ -70,7 +70,7 @@ module.exports = (app) => {
         // get payload // to send to customer service 
         try {
             
-            const { data } = await  service.getProductPayload(_id, { productId: req.body._id},'ADD_TO_WISHLIST') 
+            const { data } = await  service.GetProductPayload(_id, { productId: req.body._id},'ADD_TO_WISHLIST') 
 
             PublishCustomerEvent(data);
            

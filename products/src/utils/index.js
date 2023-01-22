@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const axios = require('axios')
 const { APP_SECRET } = require("../config");
 
 //Utility functions
@@ -32,7 +32,6 @@ module.exports.GenerateSignature = async (payload) => {
 module.exports.ValidateSignature = async (req) => {
   try {
     const signature = req.get("Authorization");
-    console.log(signature);
     const payload = await jwt.verify(signature.split(" ")[1], APP_SECRET);
     req.user = payload;
     return true;
@@ -52,7 +51,7 @@ module.exports.FormateData = (data) => {
 
 module.exports.PublishCustomerEvent = async(payload) => {
         
-  axios.post('http://localhost:8000/customer/app-events', {
+  axios.put('http://localhost:8000/customer/app-events', {
           payload
   })
 }
